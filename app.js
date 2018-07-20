@@ -1,18 +1,23 @@
 /**
- * 入口文件
  * created at 2018/07/19 by leeing
  */
 const express = require('express')
 const logger = require('morgan')
+const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const errorHandler = require('errorhandler')
 const session = require('express-session')
 const router = require('./routers')
-const authCheck = require('./middleware/authCheck')
+const db = require('./db')
 const app = express()
 
 app.use(express.static(__dirname + '/static'))
+app.use(favicon(__dirname + '/static/favicon.ico'))
+app.set('port', process.env.PORT || 5028)
+app.set('views', './views')
+app.set('view engine', 'ejs')
 
 !module.parent && app.use(logger('dev'))
 app.use(cookieParser())
@@ -31,23 +36,15 @@ app.use(session({
   secret: 'leeing - seeking'
 }))
 
-// 它的作用是对于一个路径上的所有请求加载中间件.可以做一些登陆权限验证
-app.all('/api/*', authCheck)
-
 app.use('/', router)
+// 在路由之后加载
+if ('development' === app.get('env')) {
+  app.use(errorHandler())
+}
 
-app.use((req, res, next) => {
-  res.status(404).send(`${req.originalUrl} is 404~`)
-})
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-})
-
-const server = app.listen(5028, _ => {
+const server = app.listen(app.get('port'), _ => {
   let host = server.address().address
-  let port = server.address().port
-  console.log(`app is listenging at ${host}: ${port}`)
+  console.log(`app is listenging at ${host}: ${app.get('port')}`)
 })
 
 module.exports = app

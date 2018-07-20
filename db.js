@@ -1,11 +1,15 @@
 /**
  * 只是简单的模拟
  */
-const users = []
-users.push({ name: 'TJ', pets: [pets[0], pets[1], pets[2]], id: 0  });
-users.push({ name: 'Guillermo', pets: [pets[3]], id: 1 });
-users.push({ name: 'Nathan', pets: [], id: 2 });
+const mongo = require('mongodb')
+const monk = require('monk')
+const db = monk('localhost:27017/myblog')
+
+const mysql = require('mysql')
+const {mysqlConf} = require('./config/dbConfig')
+const pool = mysql.createPool(mysqlConf)
 
 module.exports = {
-  users
+  db,
+  pool
 }
