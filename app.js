@@ -7,7 +7,6 @@ const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-const errorHandler = require('errorhandler')
 const session = require('express-session')
 const router = require('./routers')
 const db = require('./db')
@@ -21,7 +20,8 @@ app.set('view engine', 'ejs')
 
 !module.parent && app.use(logger('dev'))
 app.use(cookieParser())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json()) // for parseing application/json
+app.use(bodyParser.urlencoded({extended: true})) // for parsing application/x-www-form-urlencoded
 app.use(methodOverride('_method'))
 
 app.response.message = msg => {
@@ -37,10 +37,6 @@ app.use(session({
 }))
 
 app.use('/', router)
-// 在路由之后加载
-if ('development' === app.get('env')) {
-  app.use(errorHandler())
-}
 
 const server = app.listen(app.get('port'), _ => {
   let host = server.address().address

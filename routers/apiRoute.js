@@ -2,6 +2,7 @@
  * api
  */
 const apiRouter = require('express').Router()
+const dbRouter = require('./dbRoute')
 const userRouter = require('./userRoute')
 const loginRouter = require('./loginRoute')
 const authCheck = require('../middleware/authCheck')
@@ -9,6 +10,7 @@ const authCheck = require('../middleware/authCheck')
 // 它的作用是对于一个路径上的所有请求加载中间件.可以做一些登陆权限验证
 apiRouter.use('/', authCheck)
 
+apiRouter.use('/db', dbRouter)
 apiRouter.use('/user', userRouter)
 apiRouter.use('/', loginRouter)
 
