@@ -5,7 +5,7 @@ const {db, pool, Redis} = require('../db')
 const resHelper = require('../util/responseHelp')
 const $userSql = require('../dao/userSql')
 // redis 初始化
-Redis.global_init()
+// Redis.global_init()
 
 class DBManager {
    // 获取mongodb数据

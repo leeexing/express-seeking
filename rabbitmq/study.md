@@ -26,6 +26,13 @@ Exchange Type：
 
 ![RabbitMQ的结构图](https://img-blog.csdn.net/20170828204522460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZHJlYW1jaGFzZXJpbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
+### Topic类型的exchange❗❗❗
+
+Topic类型的exchange是很强大的，也可以实现其它类型的exchange。
+
+* 当一个队列被绑定为binding key为”#”时，它将会接收所有的消息，此时和fanout类型的exchange很像。
+* 当binding key不包含”*”和”#”时，这时候就很像direct类型的exchange。
+
 ### Exclusive Queue
 
 > 排他性队列
