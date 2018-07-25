@@ -12,8 +12,8 @@ amqp.connect('amqp://localhost', (_, conn) => {
     let msg = args.join(' ') || "Hello World!"
     let severity = args.length ? args[0] : 'info'
 
-    ch.assertExchange(ex, 'direct', {durable: false}) // RabbitMQ任务队列 持久化
-    ch.publish(ex, severity, new Buffer(msg))
+    ch.assertExchange(ex, 'direct', {durable: true}) // RabbitMQ任务队列 持久化
+    ch.publish(ex, severity, Buffer.from(msg))
     console.log(`[X] send + ${severity} + "${msg}"`)
   })
   setTimeout(function() {

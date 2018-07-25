@@ -16,7 +16,8 @@ amqp.connect('amqp://localhost', (error, conn) => {
 
     ch.assertExchange(ex, 'direct', {durable: true})
     ch.prefetch(1);
-    ch.assertQueue(ex, {exclusive: false}, (err, q) => {
+    //            定义为空字符，就不能很好和【队列名】绑定了❌❌❌
+    ch.assertQueue('', {exclusive: false}, (err, q) => {
       console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", ex)
       console.log(q)
       // 绑定路由键[第三个参数]

@@ -1,7 +1,7 @@
 /**
  * send
  */
-const RabbitMQ = require('./index')
+const RabbitMQ = require('./rabbitMq')
 const mq = new RabbitMQ()
 let count = 0
 let msg = {

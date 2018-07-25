@@ -26,17 +26,5 @@
     "mysql": "^2.16.0",
     "redis": "^2.8.0",
     "serve-favicon": "^2.5.0"
-  },
-  "config": {
-    "cz-emoji": {
-      "types": [
-        {
-          "emoji": "🌟",
-          "code": ":star2:",
-          "description": "A new feature",
-          "name": "feat"
-        }
-      ]
-    }
   }
 }
