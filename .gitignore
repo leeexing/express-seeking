@@ -7,3 +7,4 @@ yarn-error.log*
 
 # private
 *.1.*
+**/.vscode

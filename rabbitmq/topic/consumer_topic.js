@@ -15,7 +15,7 @@ amqp.connect('amqp://localhost', (error, conn) => {
     let ex = 'ex_topic'
 
     ch.assertExchange(ex, 'topic', {durable: true})
-    // ch.prefetch(1);
+    ch.prefetch(1);
     ch.assertQueue('', {exclusive: true}, (err, q) => {
       console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", ex)
 
@@ -37,6 +37,6 @@ amqp.connect('amqp://localhost', (error, conn) => {
         }, secs * 1000)
         
       }, {noAck: false})
-    })
+    }, {durable: true})
   })
 })

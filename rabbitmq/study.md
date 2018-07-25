@@ -1,5 +1,6 @@
 # rabbitmq
 
+## 
 
 ## 概念
 
@@ -165,3 +166,4 @@ ch.sendToQueue(q, new Buffer(msg), {persistent: true});
 * [2 git tutorials](https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/javascript-nodejs/src/new_task.js)
 * [中文文档](http://rabbitmq.mr-ping.com/description.html)
 * [消息队列学习之一](https://blog.csdn.net/anzhsoft/article/details/19563091)
+* [RabbitMQ 架构设计](http://www.cnblogs.com/wukong-holmes/p/9306733.html)
