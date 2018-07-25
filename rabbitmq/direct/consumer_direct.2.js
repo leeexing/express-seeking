@@ -16,7 +16,7 @@ amqp.connect('amqp://localhost', (error, conn) => {
 
     ch.assertExchange(ex, 'direct', {durable: true})
     ch.prefetch(1);
-    //            定义为空字符，就不能很好和【队列名】绑定了❌❌❌
+    //            定义为空字符，就不能很好和【队列名】绑定了❌❌❌.同事exclusive不能为true。它指的是排他性【独享】。设为true后，断开服务后，这个队列也就倍清除了
     ch.assertQueue('', {exclusive: false}, (err, q) => {
       console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", ex)
       console.log(q)

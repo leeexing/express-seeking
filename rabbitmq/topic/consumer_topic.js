@@ -16,7 +16,7 @@ amqp.connect('amqp://localhost', (error, conn) => {
 
     ch.assertExchange(ex, 'topic', {durable: true})
     ch.prefetch(1);
-    ch.assertQueue('', {exclusive: true}, (err, q) => {
+    ch.assertQueue(ex, {exclusive: false}, (err, q) => {
       console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", ex)
 
       // 绑定路由键[第三个参数]
@@ -37,6 +37,6 @@ amqp.connect('amqp://localhost', (error, conn) => {
         }, secs * 1000)
         
       }, {noAck: false})
-    }, {durable: true})
+    })
   })
 })

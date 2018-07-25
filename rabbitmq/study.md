@@ -58,6 +58,7 @@ Exchange Type：
 1. fanout 把所有发送到该 Exchange 的消息投递到所有与他绑定的队列中 -- 【广播】
 2. direct 把消息投递到那些 binding key 与 routing key 完全匹配的队列中 -- 【定制】
 3. topic  将消息路由到 binding key 与 routing key 模式匹配的队列中 -- 【正则匹配】
+4. headers 用的比较少
 
 ![RabbitMQ的结构图](https://img-blog.csdn.net/20170828204522460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZHJlYW1jaGFzZXJpbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
@@ -68,14 +69,14 @@ Topic类型的exchange是很强大的，也可以实现其它类型的exchange�
 * 当一个队列被绑定为binding key为”#”时，它将会接收所有的消息，此时和fanout类型的exchange很像。
 * 当binding key不包含”*”和”#”时，这时候就很像direct类型的exchange。
 
-### Exclusive Queue
+### Exclusive Queue ❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌很重要。必须要理解⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕
 
 > 排他性队列
 
 该队列的特点是：
 
 * 只对首次声明它的连接（Connection）可见
-* 会在其连接断开的时候自动删除。
+* 会在其连接断开的时候自动删除。⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
 
 对于第二点，RabbitMQ会自动删除这个队列，而不管这个队列是否被声明成持久性的（Durable =true)。 也就是说即使客户端程序将一个排他性的队列声明成了Durable的，只要调用了连接的Close方法或者客户端程序退出了，RabbitMQ都会删除这个队列。注意这里是连接断开的时候，而不是通道断开。这个其实前一点保持一致，只区别连接而非通道。
 
