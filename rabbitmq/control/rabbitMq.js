@@ -77,7 +77,7 @@ class RabbitMQ {
       }
     })
   }
-  // exchange
+  // exchange 发布
   publishExchangeMsg ({exchangeName='', exType='direct', routingKey='info', msg='Hello World!', errCallback=null}) {
     let that = this
     this.open.then(conn => conn.createChannel())
@@ -111,6 +111,7 @@ class RabbitMQ {
         }
       })
   }
+  // 订阅
   receiveExchangeMsg ({exchangeName='', exType='direct', routingKey='info', receiveCallBack=null, errCallback=null}) {
     let that = this
     this.open.then(conn => conn.createChannel())

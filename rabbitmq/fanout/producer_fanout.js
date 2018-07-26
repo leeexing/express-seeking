@@ -7,11 +7,12 @@ const amqp = require('amqplib/callback_api')
 
 amqp.connect('amqp://localhost', (_, conn) => {
   conn.createChannel((err, ch) => {
-    let ex = 'ex_queue'
+    let ex = 'ex_fanout'
     let msg = process.argv.slice(2).join(' ') || "Hello World!"
 
     ch.assertExchange(ex, 'fanout', {durable: true}) // RabbitMQ任务队列 持久化
-    ch.publish(ex, '', new Buffer(msg))
+    // publish(exchange: string, routingKey: string, content: Buffer, options?: Options.Publish): boolean;
+    ch.publish(ex, '', new Buffer(msg), {deliveryMode: 2}) // 消息持久化；1：非持久化
     console.log(`[X] send "${msg}"`)
   })
   setTimeout(function() {

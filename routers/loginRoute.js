@@ -4,6 +4,9 @@
 const loginRouter = require('express').Router()
 
 loginRouter.get('/userinfo', (req, res) => {
+  res.append('Set-Cookie', '');
+  // res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly');
+  res.cookie('leekinm', 'baidu', {path: '/fontend', expires: new Date(Date.now() + 3600*24*2*1000), httpOnly: true})
   res.send('users')
 })
 
